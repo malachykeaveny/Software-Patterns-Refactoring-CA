@@ -55,17 +55,13 @@ public class SearchBySurnameDialog extends JDialog implements ActionListener{
 		textPanel.add(searchField = new JTextField(20));
 		searchField.setFont(this.parent.font1);
 		searchField.setDocument(new JTextFieldLimit(20));
-
 		buttonPanel.add(search = new JButton("Search"));
 		search.addActionListener(this);
 		search.requestFocus();
-		
 		buttonPanel.add(cancel = new JButton("Cancel"));
 		cancel.addActionListener(this);
-		
 		searchPanel.add(textPanel);
 		searchPanel.add(buttonPanel);
-
 		return searchPanel;
 	}
 
@@ -75,9 +71,9 @@ public class SearchBySurnameDialog extends JDialog implements ActionListener{
 		if(e.getSource() == search){
 			this.parent.searchBySurnameField.setText(searchField.getText());
 			this.parent.searchEmployeeBySurname();
-			dispose();// dispose dialog
+			dispose();
 		}
 		else if(e.getSource() == cancel)
-			dispose();// dispose dialog
+			dispose();
 	}
 }

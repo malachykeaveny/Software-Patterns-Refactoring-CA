@@ -207,9 +207,7 @@ public class RandomFile {
 			else
 				byteToStart = byteToStart - RandomAccessEmployeeRecord.SIZE;
 		}
-		catch (NumberFormatException e) {
-		}
-		catch (IOException e) {
+		catch (NumberFormatException | IOException e) {
 		}
 		return byteToStart;
 	}

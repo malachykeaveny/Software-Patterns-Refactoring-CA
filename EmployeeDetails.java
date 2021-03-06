@@ -68,7 +68,7 @@ public class EmployeeDetails extends JFrame implements ActionListener, ItemListe
 	private JMenuItem open, save, saveAs, create, modify, delete, firstItem, lastItem, nextItem, prevItem, searchById,
 			searchBySurname, listAll, closeApp;
 	private JButton first, previous, next, last, add, edit, deleteButton, displayAll, searchId, searchSurname,
-			saveChange, cancelChange;
+			saveButton, cancelButton;
 	private JComboBox<String> genderCombo, departmentCombo, fullTimeCombo;
 	private JTextField idField, ppsField, surnameField, firstNameField, salaryField;
 	private static EmployeeDetails frame = new EmployeeDetails();
@@ -220,40 +220,32 @@ public class EmployeeDetails extends JFrame implements ActionListener, ItemListe
 		JTextField field;
 
 		empDetails.setBorder(BorderFactory.createTitledBorder("Employee Details"));
-
 		empDetails.add(new JLabel("ID:"), "growx, pushx");
 		empDetails.add(idField = new JTextField(20), "growx, pushx, wrap");
 		idField.setEditable(false);
-
 		empDetails.add(new JLabel("PPS Number:"), "growx, pushx");
 		empDetails.add(ppsField = new JTextField(20), "growx, pushx, wrap");
-
 		empDetails.add(new JLabel("Surname:"), "growx, pushx");
 		empDetails.add(surnameField = new JTextField(20), "growx, pushx, wrap");
-
 		empDetails.add(new JLabel("First Name:"), "growx, pushx");
 		empDetails.add(firstNameField = new JTextField(20), "growx, pushx, wrap");
-
 		empDetails.add(new JLabel("Gender:"), "growx, pushx");
 		empDetails.add(genderCombo = new JComboBox<String>(gender), "growx, pushx, wrap");
-
 		empDetails.add(new JLabel("Department:"), "growx, pushx");
 		empDetails.add(departmentCombo = new JComboBox<String>(department), "growx, pushx, wrap");
-
 		empDetails.add(new JLabel("Salary:"), "growx, pushx");
 		empDetails.add(salaryField = new JTextField(20), "growx, pushx, wrap");
-
 		empDetails.add(new JLabel("Full Time:"), "growx, pushx");
 		empDetails.add(fullTimeCombo = new JComboBox<String>(fullTime), "growx, pushx, wrap");
 
-		buttonPanel.add(saveChange = new JButton("Save"));
-		saveChange.addActionListener(this);
-		saveChange.setVisible(false);
-		saveChange.setToolTipText("Save changes");
-		buttonPanel.add(cancelChange = new JButton("Cancel"));
-		cancelChange.addActionListener(this);
-		cancelChange.setVisible(false);
-		cancelChange.setToolTipText("Cancel edit");
+		buttonPanel.add(saveButton = new JButton("Save"));
+		saveButton.addActionListener(this);
+		saveButton.setVisible(false);
+		saveButton.setToolTipText("Save changes");
+		buttonPanel.add(cancelButton = new JButton("Cancel"));
+		cancelButton.addActionListener(this);
+		cancelButton.setVisible(false);
+		cancelButton.setToolTipText("Cancel edit");
 
 		empDetails.add(buttonPanel, "span 2,growx, pushx,wrap");
 
@@ -766,8 +758,8 @@ public class EmployeeDetails extends JFrame implements ActionListener, ItemListe
 		departmentCombo.setEnabled(booleanValue);
 		salaryField.setEditable(booleanValue);
 		fullTimeCombo.setEnabled(booleanValue);
-		saveChange.setVisible(booleanValue);
-		cancelChange.setVisible(booleanValue);
+		saveButton.setVisible(booleanValue);
+		cancelButton.setVisible(booleanValue);
 		searchByIdField.setEnabled(search);
 		searchBySurnameField.setEnabled(search);
 		searchId.setEnabled(search);
@@ -978,10 +970,10 @@ public class EmployeeDetails extends JFrame implements ActionListener, ItemListe
 			searchEmployeeById();
 		else if (e.getSource() == searchSurname || e.getSource() == searchBySurnameField)
 			searchEmployeeBySurname();
-		else if (e.getSource() == saveChange) {
+		else if (e.getSource() == saveButton) {
 			if (checkInput() && !checkForChanges())
 				;
-		} else if (e.getSource() == cancelChange)
+		} else if (e.getSource() == cancelButton)
 			cancelChange();
 		else if (e.getSource() == firstItem || e.getSource() == first) {
 			if (checkInput() && !checkForChanges()) {

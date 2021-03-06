@@ -73,18 +73,13 @@ public class EmployeeSummaryDialog extends JDialog implements ActionListener {
         // changed parameters for DefaultTableModel
         tableModel = new DefaultTableModel(allEmployees.size(), header.size()) {
             public Class getColumnClass(int c) {
-                switch (c) {
-                    case 0:
-                        return Integer.class;
-                    case 4:
-                        return Character.class;
-                    case 6:
-                        return Double.class;
-                    case 7:
-                        return Boolean.class;
-                    default:
-                        return String.class;
-                }
+                return switch (c) {
+                    case 0 -> Integer.class;
+                    case 4 -> Character.class;
+                    case 6 -> Double.class;
+                    case 7 -> Boolean.class;
+                    default -> String.class;
+                };
             }
         };
 

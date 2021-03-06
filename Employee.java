@@ -14,7 +14,6 @@ public class Employee{
 	private double salary;
 	private boolean fullTime;
 
-	// Create Employee with no details
 	public Employee() {
 		this.employeeId = 0;
 		this.pps = "";
@@ -26,7 +25,6 @@ public class Employee{
 		this.fullTime = false;
 	}
 
-	// Create Employee with details
 	public Employee(int employeeId, String pps, String surname, String firstName, char gender, String department, double salary,
 			boolean fullTime) {
 		this.employeeId = employeeId;
