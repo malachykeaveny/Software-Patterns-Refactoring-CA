@@ -91,24 +91,19 @@ public class EmployeeDetails extends JFrame implements ActionListener, ItemListe
 		menuBar.add(navigateMenu);
 		menuBar.add(closeMenu);
 
-		fileMenu.add(open = new JMenuItem("Open")).addActionListener(this);
-		open.setMnemonic(KeyEvent.VK_O);
-		open.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_O, ActionEvent.CTRL_MASK));
-		fileMenu.add(save = new JMenuItem("Save")).addActionListener(this);
-		save.setMnemonic(KeyEvent.VK_S);
-		save.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_S, ActionEvent.CTRL_MASK));
-		fileMenu.add(saveAs = new JMenuItem("Save As")).addActionListener(this);
-		saveAs.setMnemonic(KeyEvent.VK_F2);
-		saveAs.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_F2, ActionEvent.CTRL_MASK));
 
-		recordMenu.add(create = new JMenuItem("Create new Record")).addActionListener(this);
-		create.setMnemonic(KeyEvent.VK_N);
-		create.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_N, ActionEvent.CTRL_MASK));
-		recordMenu.add(modify = new JMenuItem("Modify Record")).addActionListener(this);
-		modify.setMnemonic(KeyEvent.VK_E);
-		modify.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_E, ActionEvent.CTRL_MASK));
-		recordMenu.add(delete = new JMenuItem("Delete Record")).addActionListener(this);
+		setupFileMenu(fileMenu);
+		setupRecordMenu(recordMenu);
+		setupNavigateMenu(navigateMenu);
 
+		closeMenu.add(closeApp = new JMenuItem("Close")).addActionListener(this);
+		closeApp.setMnemonic(KeyEvent.VK_F4);
+		closeApp.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_F4, ActionEvent.CTRL_MASK));
+
+		return menuBar;
+	}
+
+	private void setupNavigateMenu(JMenu navigateMenu) {
 		navigateMenu.add(firstItem = new JMenuItem("First"));
 		firstItem.addActionListener(this);
 		navigateMenu.add(prevItem = new JMenuItem("Previous"));
@@ -121,12 +116,28 @@ public class EmployeeDetails extends JFrame implements ActionListener, ItemListe
 		navigateMenu.add(searchById = new JMenuItem("Search by ID")).addActionListener(this);
 		navigateMenu.add(searchBySurname = new JMenuItem("Search by Surname")).addActionListener(this);
 		navigateMenu.add(listAll = new JMenuItem("List all Records")).addActionListener(this);
+	}
 
-		closeMenu.add(closeApp = new JMenuItem("Close")).addActionListener(this);
-		closeApp.setMnemonic(KeyEvent.VK_F4);
-		closeApp.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_F4, ActionEvent.CTRL_MASK));
+	private void setupRecordMenu(JMenu recordMenu) {
+		recordMenu.add(create = new JMenuItem("Create new Record")).addActionListener(this);
+		create.setMnemonic(KeyEvent.VK_N);
+		create.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_N, ActionEvent.CTRL_MASK));
+		recordMenu.add(modify = new JMenuItem("Modify Record")).addActionListener(this);
+		modify.setMnemonic(KeyEvent.VK_E);
+		modify.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_E, ActionEvent.CTRL_MASK));
+		recordMenu.add(delete = new JMenuItem("Delete Record")).addActionListener(this);
+	}
 
-		return menuBar;
+	private void setupFileMenu(JMenu fileMenu) {
+		fileMenu.add(open = new JMenuItem("Open")).addActionListener(this);
+		open.setMnemonic(KeyEvent.VK_O);
+		open.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_O, ActionEvent.CTRL_MASK));
+		fileMenu.add(save = new JMenuItem("Save")).addActionListener(this);
+		save.setMnemonic(KeyEvent.VK_S);
+		save.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_S, ActionEvent.CTRL_MASK));
+		fileMenu.add(saveAs = new JMenuItem("Save As")).addActionListener(this);
+		saveAs.setMnemonic(KeyEvent.VK_F2);
+		saveAs.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_F2, ActionEvent.CTRL_MASK));
 	}
 
 	private JPanel searchPanel() {
