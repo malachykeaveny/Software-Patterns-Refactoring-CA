@@ -50,20 +50,13 @@ import javax.swing.filechooser.FileNameExtensionFilter;
 import net.miginfocom.swing.MigLayout;
 
 public class EmployeeDetails extends JFrame implements ActionListener, ItemListener, DocumentListener, WindowListener {
-	// decimal format for inactive currency text field
 	private static final DecimalFormat format = new DecimalFormat("\u20ac ###,###,##0.00");
-	// decimal format for active currency text field
 	private static final DecimalFormat fieldFormat = new DecimalFormat("0.00");
-	// hold object start position in file
 	private long currentByteStart = 0;
-	private RandomFile application = new RandomFile();
-	// display files in File Chooser only with extension .dat
-	private FileNameExtensionFilter datfilter = new FileNameExtensionFilter("dat files (*.dat)", "dat");
-	// hold file name and path for current file in use
+	private final RandomFile application = new RandomFile();
+	private final FileNameExtensionFilter datfilter = new FileNameExtensionFilter("dat files (*.dat)", "dat");
 	private File file;
-	// holds true or false if any changes are made for text fields
 	private boolean change = false;
-	// holds true or false if any changes are made for file content
 	boolean changesMade = false;
 	private JMenuItem open, save, saveAs, create, modify, delete, firstItem, lastItem, nextItem, prevItem, searchById,
 			searchBySurname, listAll, closeApp;
@@ -71,7 +64,7 @@ public class EmployeeDetails extends JFrame implements ActionListener, ItemListe
 			saveButton, cancelButton;
 	private JComboBox<String> genderCombo, departmentCombo, fullTimeCombo;
 	private JTextField idField, ppsField, surnameField, firstNameField, salaryField;
-	private static EmployeeDetails frame = new EmployeeDetails();
+	private static final EmployeeDetails frame = new EmployeeDetails();
 	Font font1 = new Font("SansSerif", Font.BOLD, 16);
 	String generatedFileName;
 	Employee currentEmployee;
@@ -310,7 +303,7 @@ public class EmployeeDetails extends JFrame implements ActionListener, ItemListe
 			departmentCombo.setSelectedIndex(countDep);
 			salaryField.setText(format.format(thisEmployee.getSalary()));
 			// set corresponding full time combo box value to current employee
-			if (thisEmployee.getFullTime() == true)
+			if (thisEmployee.getFullTime())
 				fullTimeCombo.setSelectedIndex(1);
 			else
 				fullTimeCombo.setSelectedIndex(2);

@@ -91,17 +91,15 @@ public class RandomFile {
 
 	// Change details for existing object
 	public void changeRecords(Employee newDetails, long byteToStart) {
-		long currentRecordStart = byteToStart;
 		// object to be written to file
 		RandomAccessEmployeeRecord record;
-		Employee oldDetails = newDetails;
 		try // output values to file
 		{
-			record = new RandomAccessEmployeeRecord(oldDetails.getEmployeeId(), oldDetails.getPps(),
-					oldDetails.getSurname(), oldDetails.getFirstName(), oldDetails.getGender(),
-					oldDetails.getDepartment(), oldDetails.getSalary(), oldDetails.getFullTime());
+			record = new RandomAccessEmployeeRecord(newDetails.getEmployeeId(), newDetails.getPps(),
+					newDetails.getSurname(), newDetails.getFirstName(), newDetails.getGender(),
+					newDetails.getDepartment(), newDetails.getSalary(), newDetails.getFullTime());
 
-			output.seek(currentRecordStart);// Look for proper position
+			output.seek(byteToStart);// Look for proper position
 			record.write(output);// Write object to file
 		}
 		catch (IOException ioException) {
@@ -111,7 +109,6 @@ public class RandomFile {
 
 	// Delete existing object
 	public void deleteRecords(long byteToStart) {
-		long currentRecordStart = byteToStart;
 
 		// object to be written to file
 		RandomAccessEmployeeRecord record;
@@ -119,7 +116,7 @@ public class RandomFile {
 		try // output values to file
 		{
 			record = new RandomAccessEmployeeRecord();// Create empty object
-			output.seek(currentRecordStart);// Look for proper position
+			output.seek(byteToStart);// Look for proper position
 			record.write(output);// Replace existing object with empty object
 		}
 		catch (IOException ioException) {
@@ -188,9 +185,7 @@ public class RandomFile {
 			else
 				byteToStart = byteToStart + RandomAccessEmployeeRecord.SIZE;
 		}
-		catch (NumberFormatException e) {
-		}
-		catch (IOException e) {
+		catch (NumberFormatException | IOException e) {
 		}
 		return byteToStart;
 	}
@@ -231,14 +226,13 @@ public class RandomFile {
 	public boolean isPpsExist(String pps, long currentByteStart) {
 		RandomAccessEmployeeRecord record = new RandomAccessEmployeeRecord();
 		boolean ppsExist = false;
-		long oldByteStart = currentByteStart;
 		long currentByte = 0;
 
 		try {
 			// Start from start of file and loop until PPS Number is found or search returned to start position
 			while (currentByte != input.length() && !ppsExist) {
 				//if PPS Number is in position of current object - skip comparison
-				if (currentByte != oldByteStart) {
+				if (currentByte != currentByteStart) {
 					input.seek(currentByte);// Look for proper position in file
 					record.read(input);// Get record from file
 					// If PPS Number already exist in other record display message and stop search

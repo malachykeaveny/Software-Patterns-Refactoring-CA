@@ -23,7 +23,7 @@ import javax.swing.border.EtchedBorder;
 
 public class SearchByIdDialog extends JDialog implements ActionListener {
 	EmployeeDetails parent;
-	JButton search, cancel;
+	JButton searchButton, cancelButton;
 	JTextField searchField;
 
 	public SearchByIdDialog(EmployeeDetails parent) {
@@ -33,7 +33,7 @@ public class SearchByIdDialog extends JDialog implements ActionListener {
 		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		JScrollPane scrollPane = new JScrollPane(searchPane());
 		setContentPane(scrollPane);
-		getRootPane().setDefaultButton(search);
+		getRootPane().setDefaultButton(searchButton);
 		setSize(500, 190);
 		setLocation(350, 250);
 		setVisible(true);
@@ -52,11 +52,11 @@ public class SearchByIdDialog extends JDialog implements ActionListener {
 		textPanel.add(searchField = new JTextField(20));
 		searchField.setFont(this.parent.font1);
 		searchField.setDocument(new JTextFieldLimit(20));
-		buttonPanel.add(search = new JButton("Search"));
-		search.addActionListener(this);
-		search.requestFocus();
-		buttonPanel.add(cancel = new JButton("Cancel"));
-		cancel.addActionListener(this);
+		buttonPanel.add(searchButton = new JButton("Search"));
+		searchButton.addActionListener(this);
+		searchButton.requestFocus();
+		buttonPanel.add(cancelButton = new JButton("Cancel"));
+		cancelButton.addActionListener(this);
 		searchPanel.add(textPanel);
 		searchPanel.add(buttonPanel);
 		return searchPanel;
@@ -64,7 +64,7 @@ public class SearchByIdDialog extends JDialog implements ActionListener {
 
 	public void actionPerformed(ActionEvent e) {
 
-		if (e.getSource() == search) {
+		if (e.getSource() == searchButton) {
 			try {
 				Double.parseDouble(searchField.getText());
 				this.parent.searchByIdField.setText(searchField.getText());
@@ -76,7 +76,7 @@ public class SearchByIdDialog extends JDialog implements ActionListener {
 				JOptionPane.showMessageDialog(null, "Wrong ID format!");
 			}
 		}
-		else if (e.getSource() == cancel)
+		else if (e.getSource() == cancelButton)
 			dispose();
 	}
 }
