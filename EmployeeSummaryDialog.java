@@ -65,11 +65,10 @@ public class EmployeeSummaryDialog extends JDialog implements ActionListener {
         centerRenderer.setHorizontalAlignment(JLabel.CENTER);
         leftRenderer.setHorizontalAlignment(JLabel.LEFT);
         // add headers
-        for (int i = 0; i < headerName.length; i++) {
-            header.addElement(headerName[i]);
+        for (String s : headerName) {
+            header.addElement(s);
         }
-        // construnct table and choose table model for each column
-        // changed parameters for DefaultTableModel
+
         tableModel = new DefaultTableModel(allEmployees.size(), header.size()) {
             public Class getColumnClass(int c) {
                 return switch (c) {

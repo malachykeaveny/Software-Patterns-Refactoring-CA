@@ -558,14 +558,14 @@ public class EmployeeDetails extends JFrame implements ActionListener, ItemListe
 		// loop until all Employees are added to vector
 		do {
 			empDetails = new Vector<Object>();
-			empDetails.addElement(new Integer(currentEmployee.getEmployeeId()));
+			empDetails.addElement(currentEmployee.getEmployeeId());
 			empDetails.addElement(currentEmployee.getPps());
 			empDetails.addElement(currentEmployee.getSurname());
 			empDetails.addElement(currentEmployee.getFirstName());
-			empDetails.addElement(new Character(currentEmployee.getGender()));
+			empDetails.addElement(currentEmployee.getGender());
 			empDetails.addElement(currentEmployee.getDepartment());
-			empDetails.addElement(new Double(currentEmployee.getSalary()));
-			empDetails.addElement(new Boolean(currentEmployee.getFullTime()));
+			empDetails.addElement(currentEmployee.getSalary());
+			empDetails.addElement(currentEmployee.getFullTime());
 
 			allEmployee.addElement(empDetails);
 			nextRecord();// look for next record
@@ -667,7 +667,7 @@ public class EmployeeDetails extends JFrame implements ActionListener, ItemListe
 			displayRecords(currentEmployee);
 		}
 
-		return anyChanges;
+		return !anyChanges;
 	}
 
 	// check for input in text fields
@@ -740,10 +740,7 @@ public class EmployeeDetails extends JFrame implements ActionListener, ItemListe
 	// enable text fields for editing
 	public void setEnabled(boolean booleanValue) {
 		boolean search;
-		if (booleanValue)
-			search = false;
-		else
-			search = true;
+		search = !booleanValue;
 		ppsField.setEditable(booleanValue);
 		surnameField.setEditable(booleanValue);
 		firstNameField.setEditable(booleanValue);
@@ -923,8 +920,7 @@ public class EmployeeDetails extends JFrame implements ActionListener, ItemListe
 			int index = (int) (rnd.nextFloat() * fileNameChars.length());
 			fileName.append(fileNameChars.charAt(index));
 		}
-		String generatedfileName = fileName.toString();
-		return generatedfileName;
+		return fileName.toString();
 	}
 
 	// create file with generated file name when application is opened
@@ -940,69 +936,69 @@ public class EmployeeDetails extends JFrame implements ActionListener, ItemListe
 	public void actionPerformed(ActionEvent e) {
 
 		if (e.getSource() == closeApp) {
-			if (checkInput() && !checkForChanges())
+			if (checkInput() && checkForChanges())
 				exitApp();
 		} else if (e.getSource() == open) {
-			if (checkInput() && !checkForChanges())
+			if (checkInput() && checkForChanges())
 				openFile();
 		} else if (e.getSource() == save) {
-			if (checkInput() && !checkForChanges())
+			if (checkInput() && checkForChanges())
 				saveFile();
 			change = false;
 		} else if (e.getSource() == saveAs) {
-			if (checkInput() && !checkForChanges())
+			if (checkInput() && checkForChanges())
 				saveFileAs();
 			change = false;
 		} else if (e.getSource() == searchById) {
-			if (checkInput() && !checkForChanges())
+			if (checkInput() && checkForChanges())
 				displaySearchByIdDialog();
 		} else if (e.getSource() == searchBySurname) {
-			if (checkInput() && !checkForChanges())
+			if (checkInput() && checkForChanges())
 				displaySearchBySurnameDialog();
 		} else if (e.getSource() == searchId || e.getSource() == searchByIdField)
 			searchEmployeeById();
 		else if (e.getSource() == searchSurname || e.getSource() == searchBySurnameField)
 			searchEmployeeBySurname();
 		else if (e.getSource() == saveButton) {
-			if (checkInput() && !checkForChanges())
+			if (checkInput() && checkForChanges())
 				;
 		} else if (e.getSource() == cancelButton)
 			cancelChange();
 		else if (e.getSource() == firstItem || e.getSource() == first) {
-			if (checkInput() && !checkForChanges()) {
+			if (checkInput() && checkForChanges()) {
 				firstRecord();
 				displayRecords(currentEmployee);
 			}
 		} else if (e.getSource() == prevItem || e.getSource() == previous) {
-			if (checkInput() && !checkForChanges()) {
+			if (checkInput() && checkForChanges()) {
 				previousRecord();
 				displayRecords(currentEmployee);
 			}
 		} else if (e.getSource() == nextItem || e.getSource() == next) {
-			if (checkInput() && !checkForChanges()) {
+			if (checkInput() && checkForChanges()) {
 				nextRecord();
 				displayRecords(currentEmployee);
 			}
 		} else if (e.getSource() == lastItem || e.getSource() == last) {
-			if (checkInput() && !checkForChanges()) {
+			if (checkInput() && checkForChanges()) {
 				lastRecord();
 				displayRecords(currentEmployee);
 			}
 		} else if (e.getSource() == listAll || e.getSource() == displayAll) {
-			if (checkInput() && !checkForChanges())
+			if (checkInput() && checkForChanges())
 				if (isSomeoneToDisplay())
 					displayEmployeeSummaryDialog();
 		} else if (e.getSource() == create || e.getSource() == add) {
-			if (checkInput() && !checkForChanges())
+			if (checkInput() && checkForChanges())
 				new AddRecordDialog(EmployeeDetails.this);
 		} else if (e.getSource() == modify || e.getSource() == edit) {
-			if (checkInput() && !checkForChanges())
+			if (checkInput() && checkForChanges())
 				editDetails();
 		} else if (e.getSource() == delete || e.getSource() == deleteButton) {
-			if (checkInput() && !checkForChanges())
+			if (checkInput() && checkForChanges())
 				deleteRecord();
 		} else if (e.getSource() == searchBySurname) {
-			if (checkInput() && !checkForChanges())
+			if (checkInput() && checkForChanges())
 				new SearchBySurnameDialog(EmployeeDetails.this);
 		}
 	}
